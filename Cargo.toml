@@ -9,8 +9,8 @@ readme = "README.md"
 license = "MIT"
 
 [dependencies]
-iron = "0.4.0"
-hyper = "0.9.10"
+iron = "0.5.1"
+hyper = "0.11.1"
 conduit-mime-types = "0.7.3"
-lazy_static = "0.2.1"
+lazy_static = "0.2.8"
 http-range = "0.1.1"

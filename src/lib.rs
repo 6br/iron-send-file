@@ -4,7 +4,6 @@
 
 #[macro_use]
 extern crate iron;
-#[macro_use]
 extern crate lazy_static;
 extern crate hyper;
 extern crate conduit_mime_types as mime_types;
@@ -17,12 +16,7 @@ use std::path::Path;
 use iron::{IronResult, Request, Response, Set};
 use iron::status;
 use iron::headers;
-use hyper::mime::Mime;
 use http_range::{HttpRange, HttpRangeParseError};
-
-lazy_static! {
-    static ref MIME_TYPES: mime_types::Types = mime_types::Types::new().unwrap();
-}
 
 /// Send file
 ///
@@ -66,8 +60,7 @@ pub fn send_file(req: &Request, mut res: Response, path: &Path) -> IronResult<Re
         None => None,
     };
 
-    let mime_str = MIME_TYPES.mime_for_path(path);
-    let _ = mime_str.parse().map(|mime: Mime| res.set_mut(mime));
+    res.set_mut(path);
 
     match range {
         Some(range) => {
